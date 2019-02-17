@@ -4,7 +4,7 @@ import math
 from scipy import interpolate
 from scipy.stats import truncexpon
 from matplotlib.patches import Ellipse
-
+#hello
 def check_choice_okay(A,N):
     A = np.sort(A)
     #print(A)
