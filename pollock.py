@@ -305,7 +305,6 @@ def main():
     bg_line.plt_spline()
 
     for i in range(num_features):
-        print(i)
         color = feature_colors[np.random.choice([0,1,2,3,4,5], p = [0.25,0.25,0.16,0.16,0.16,0.02])]
         line_or_splatter = np.random.choice([0,1],p=[0.10,0.90])
 
@@ -333,7 +332,7 @@ def main():
             my_flick = flick(start,end,fig,ax,spreadiness,thickness, color = color)
             my_flick.draw_ellipses()
 
-    plt.savefig("pollock",bbox_inches='tight',dpi = 1200)
+    plt.savefig("pollock",bbox_inches='tight',dpi = 800)
 
 
 if __name__=="__main__":
