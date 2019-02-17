@@ -267,72 +267,74 @@ class flick:
             sp.paint_ellipse(0.3)
             #sp.paint_ellipse((l-centers_and_lhats[1][i])/(0.5*l))
 
-
-
-def main():
-    # canvas is 1200 x 1600
-
-    num_features = np.random.randint(70,400)
+def paint(filename):
+	num_features = np.random.randint(70,400)
 
     # initialize canvas
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
+	fig = plt.figure()
+	ax = fig.add_subplot(111)
     
     #plt.axis('off')
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-    #plt.savefig('pict.png', bbox_inches='tight', pad_inches = 0)
-    plt.xlim(-1600,1600)
-    plt.ylim(-1200,1200)
-    bg_colors = ["#e5e2cc","#dddac1","#efeee1","#d8d5c7","#f7f4ea","#f2f1ed","#efebdc","#edebe1","#f2f1ea","#edeada","#e5e3da","#eae8e3"]
+	ax.get_xaxis().set_visible(False)
+	ax.get_yaxis().set_visible(False)
+	#plt.savefig('pict.png', bbox_inches='tight', pad_inches = 0)
+	plt.xlim(-1600,1600)
+	plt.ylim(-1200,1200)
+	bg_colors = ["#e5e2cc","#dddac1","#efeee1","#d8d5c7","#f7f4ea","#f2f1ed","#efebdc","#edebe1","#f2f1ea","#edeada","#e5e3da","#eae8e3"]
 
-    wild_color = (np.random.randint(255)/255,np.random.randint(255)/255,np.random.randint(255)/255)
+	wild_color = (np.random.randint(255)/255,np.random.randint(255)/255,np.random.randint(255)/255)
 
-    blue = ["#2d79bc","#1d3be2","#5eb2d6","#4786e5","#0e1eb2","#96bc38"][np.random.randint(0,6)]
-    red = ["#e07f74","#d8433e","#d14e34","#d65428","#ce6750","#bf7070"][np.random.randint(0,6)]
-    yellow = ["#dda91a","#ffd507","#edd57d","#fff884","#e8d27a","#e0bb35"][np.random.randint(0,6)]
-    feature_colors = ["#ffffff","#000000",blue,red,yellow,wild_color]
+	blue = ["#2d79bc","#1d3be2","#5eb2d6","#4786e5","#0e1eb2","#96bc38"][np.random.randint(0,6)]
+	red = ["#e07f74","#d8433e","#d14e34","#d65428","#ce6750","#bf7070"][np.random.randint(0,6)]
+	yellow = ["#dda91a","#ffd507","#edd57d","#fff884","#e8d27a","#e0bb35"][np.random.randint(0,6)]
+	feature_colors = ["#ffffff","#000000",blue,red,yellow,wild_color]
 
-    ax.set_facecolor(bg_colors[np.random.randint(0,12)])
+	ax.set_facecolor(bg_colors[np.random.randint(0,12)])
 
-    bg_line_color = ["#ffffff","#000000"][np.random.choice([0,1], p = [0,1])]
-    bg_line_N = np.random.randint(100,500)
-    bg_line_xs  = np.random.randint(-1600,1600, bg_line_N)
-    bg_line_ys = np.random.randint(-1200,1200,bg_line_N)
-    bg_line_points = np.dstack((bg_line_xs,bg_line_ys))[0]
-    bg_line_mit = np.random.randint(1,10)
-    bg_line = paint_line(bg_line_points,bg_line_mit,fig,ax,color=bg_line_color)
-    bg_line.plt_spline()
+	bg_line_color = ["#ffffff","#000000"][np.random.choice([0,1], p = [0,1])]
+	bg_line_N = np.random.randint(100,500)
+	bg_line_xs  = np.random.randint(-1600,1600, bg_line_N)
+	bg_line_ys = np.random.randint(-1200,1200,bg_line_N)
+	bg_line_points = np.dstack((bg_line_xs,bg_line_ys))[0]
+	bg_line_mit = np.random.randint(1,10)
+	bg_line = paint_line(bg_line_points,bg_line_mit,fig,ax,color=bg_line_color)
+	bg_line.plt_spline()
 
-    for i in range(num_features):
-        color = feature_colors[np.random.choice([0,1,2,3,4,5], p = [0.25,0.25,0.16,0.16,0.16,0.02])]
-        line_or_splatter = np.random.choice([0,1],p=[0.10,0.90])
+	for i in range(num_features):
+		color = feature_colors[np.random.choice([0,1,2,3,4,5], p = [0.25,0.25,0.16,0.16,0.16,0.02])]
 
-        if line_or_splatter == 0: #then it's a line
-            N = np.random.randint(8,32)
-            xs  = np.random.randint(-1600,1600, N)
-            ys = np.random.randint(-1200,1200,N)
-            points = np.dstack((xs,ys))[0]
+		line_or_splatter = np.random.choice([0,1],p=[0.10,0.90])
 
-            if N > 10:
-                mit = np.random.uniform(1,50)
+		if line_or_splatter == 0: #then it's a line
+			N = np.random.randint(8,32)
+			xs  = np.random.randint(-1600,1600, N)
+			ys = np.random.randint(-1200,1200,N)
+			points = np.dstack((xs,ys))[0]
 
-            else:
-                mit = np.random.uniform(30,150)
+			if N > 10:
+				mit = np.random.uniform(1,50)
 
-            pl = paint_line(points,mit,fig,ax,color=color)
-            pl.plt_spline()
+			else:
+				mit = np.random.uniform(30,150)
+
+			pl = paint_line(points,mit,fig,ax,color=color)
+			pl.plt_spline()
             
-        else: #then it's a splatter
-            start = np.array([np.random.randint(-1600, 1600), np.random.randint(-1200, 1200)])
-            end = np.array([np.random.randint(-1600, 1600), np.random.randint(-1200, 1200)])
-            spreadiness = np.random.uniform(0,0.4)
-            thickness = np.random.uniform(0.95,4)
+		else: #then it's a splatter
+			start = np.array([np.random.randint(-1600, 1600), np.random.randint(-1200, 1200)])
+			end = np.array([np.random.randint(-1600, 1600), np.random.randint(-1200, 1200)])
+			spreadiness = np.random.uniform(0,0.4)
+			thickness = np.random.uniform(0.95,4)
 
-            my_flick = flick(start,end,fig,ax,spreadiness,thickness, color = color)
-            my_flick.draw_ellipses()
+			my_flick = flick(start,end,fig,ax,spreadiness,thickness, color = color)
+			my_flick.draw_ellipses()
 
-    plt.savefig("pollock",bbox_inches='tight',dpi = 800)
+	plt.savefig(filename,bbox_inches='tight',dpi = 800)
+
+def main():
+    filenames = [f"pollock{i}" for i in range(10)]
+    for filename in filenames:
+    	paint(filename)
 
 
 if __name__=="__main__":
