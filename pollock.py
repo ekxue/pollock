@@ -332,9 +332,7 @@ def paint(filename):
 	plt.savefig(filename,bbox_inches='tight',dpi = 800)
 
 def main():
-    filenames = [f"pollock{i}" for i in range(10)]
-    for filename in filenames:
-    	paint(filename)
+    paint("pollock")
 
 
 if __name__=="__main__":
